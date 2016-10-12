@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block import %}
+<style>
+
+    table {
+        margin-top: 50px;
+    }
+</style>
+{% endblock %}
+
+
+{% block container %}
+
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>用户名</th>
+        <th>昵称</th>
+        <th>密码</th>
+        <th>邮箱</th>
+        <th>github</th>
+        <th>qq/微信</th>
+        <th>头像</th>
+        <th>微博总数</th>
+        <th>聊天记录数</th>
+        <th>微博评论总数</th>
+        <th>博客评论数</th>
+        <th>发帖数</th>
+        <th>帖子评论数</th>
+        <th>赞过的微博ID</th>
+        <th>注册IP</th>
+        <th>非法请求次数</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for u in users %}
+    <tr>
+        <td>{{ u.id }}</td>
+        <td>{{ u.username }}</td>
+        <td>{{ u.password }}</td>
+        <td>{{ u.nickname }}</td>
+        <td>{{ u.email }}</td>
+        <td>{{ u.github }}</td>
+        <td>{{ u.qq }}</td>
+        <td><img src="{{ u.avatar }}" class="img-s"></td>
+        <td>{{ u.chats.all()|length }}聊天记录数</td>
+        <td>{{ u.blog_comments.all()|length }}博客评论数</td>
+        <td>{{ u.weibos.all()|length }}</td>
+        <td>{{ u.weibo_comments.all()|length }}微博评论总数</td>
+        <td>{{ u.topics.all()|length }}发帖数</td>
+        <td>{{ u.topic_comments.all()|length }}帖子评论数</td>
+        <td>{{ u.like_weibo.split(';') }}</td>
+        <td>{{ u.ip_register }}</td>
+        <td>{{ u.unsafe }}</td>
+
+    </tr>
+    {% endfor %}
+
+    </tbody>
+
+</table>
+{% endblock %}

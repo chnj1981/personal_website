@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+
+{% block title %}Simplue | 新贴{% endblock %}
+
+{% block import %}
+<style>
+
+    .row {
+        margin-top: 80px;
+    }
+
+    #result {
+        border: 1px solid grey;
+        overflow: auto;
+        padding: 20px;
+        border-radius: 4px;
+    }
+
+    #result, #content {
+        height: 700px !important;
+        padding: 6px 12px;
+    }
+
+    #title {
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+
+    .select {
+        margin-bottom: 20px;
+    }
+
+
+</style>
+
+
+{% endblock %}
+
+{% block container %}
+<div class="">
+    {% if topic is none %}
+
+    <div class="row center-block topic">
+        <div class="col-xs-12">
+            <select class="form-control select-node">
+                <option data-id="0">请选择板块</option>
+                {% for n in Node.query.filter_by(parent_id=0) %}
+                <option data-id="{{ n.id }}">{{ n.show_name }}</option>
+                {% for c in Node.query.filter_by(parent_id=n.id) %}
+                <option data-id="{{ c.id }}">&nbsp;&nbsp;|-&nbsp;{{ c.show_name }}</option>
+                {% endfor %}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-xs-12">
+            <textarea id="title" class="form-control" minlength="1" maxlength="100" rows="1"
+                      placeholder="标题" autofocus></textarea>
+        </div>
+
+        <div class="col-xs-6">
+            <textarea id="content" minlength="20" maxlength="5000" class="form-control" rows="50"
+                      placeholder="20字以上, 输入区(支持部分常用的Markdown语法, 语法高亮)"></textarea>
+        </div>
+
+        <div class="col-xs-6">
+            <div id="result" style="background: white">预览区(预览仅供参考, 实际显示可能存在差异)</div>
+        </div>
+
+        <div class="col-xs-12">
+            <a href="#"
+               class="center-block btn btn-success btn-block btn-add-topic disabled">发布新帖</a>
+        </div>
+
+    </div>
+
+    {% else %}
+
+    <div class="row center-block topic" data-id="{{ topic.id }}">
+        <div class="col-xs-12">
+            <textarea id="title" class="form-control" minlength="1" maxlength="100" rows="1"
+                      placeholder="标题" autofocus>{{ topic.title }}</textarea>
+        </div>
+
+        <div class="col-xs-6">
+            <textarea id="content" minlength="20" maxlength="5000" class="form-control" rows="50"
+                      placeholder="20字以上, 输入区(支持部分常用的Markdown语法, 语法高亮)">{{ topic.content }}</textarea>
+        </div>
+
+        <div class="col-xs-6">
+            <div id="result" style="background: white">预览(预览仅供参考, 实际显示可能存在差异)</div>
+        </div>
+
+        <div class="col-xs-12">
+            <a href="#" class="center-block btn btn-warning btn-block btn-update-topic disabled">更新帖子</a>
+        </div>
+
+    </div>
+    {% endif %}
+
+
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+
+    var invalidTopic = function () {
+        var title = $('#title')
+        var content = $('#content')
+
+        $('#title, #content').keyup(function () {
+            var t_valid = $.trim(title.val()).length > 0
+            var c_valid = $.trim(content.val()).length > 19
+
+            var b = $('.btn')
+
+            if (c_valid && t_valid) {
+                b.removeClass("disabled");
+
+            } else {
+                b.addClass("disabled");
+            }
+
+        })
+
+
+        return false
+    }
+
+
+    var convert = function () {
+        $('#content').keyup(function () {
+            var converter = new showdown.Converter();
+            //支持显示如同github的勾选框，默认false
+            //ep: - [x] This task is done
+            converter.setOption("tasklists", true);
+            //支持显示table，默认false
+            converter.setOption("tables", true);
+            //支持图片大小设置，默认为false
+//        converter.setOption("parseImgDimensions", true);
+            /**
+             **更多地请看https://github.com/showdownjs/showdown文档
+             **/
+            var html = converter.makeHtml($(this).val());
+            $("#result").html(html);
+
+            $('pre code').each(function (i, block) {
+                hljs.highlightBlock(block);
+            });
+        })
+    }
+
+    var updateTopic = function () {
+        $('.btn-update-topic').click(function () {
+            if ($(this).hasClass('disabled')) {
+                return false
+            }
+
+            var title = $('#title').val()
+            var content = $('#content').val()
+
+
+            var form = {
+                title: filterXSS(title),
+                content: filterXSS(content),
+            }
+
+
+            var response = function (r) {
+                log(r, r.data)
+                if (r.success) {
+                    alert(r.message)
+                    var data = r.data
+                    location.href = '/forum/topic/' + data.id
+                } else {
+                    alert(r.message)
+                }
+
+            }
+
+            var id = $('.topic').data('id')
+            api.updateTopic(id, form, response)
+            return false
+
+        })
+    }
+
+    var addTopic = function () {
+        $('.btn-add-topic').click(function () {
+            if ($(this).hasClass('disabled')) {
+                return false
+            }
+
+            var title = $('#title').val()
+            var content = $('#content').val()
+            var board_id = $(".select-node").find("option:selected").data('id')
+
+            if (board_id == 0) {
+                alert('请选择板块')
+                return false
+            }
+
+            var form = {
+                title: filterXSS(title),
+                content: filterXSS(content),
+                board_id: board_id,
+            }
+
+            var response = function (r) {
+                if (r.success) {
+                    alert(r.message)
+                    log(r.data)
+                    location.href = '/forum/topic/' + r.data.id
+                } else {
+                    alert(r.message)
+                }
+            }
+
+            api.addTopic(form, response)
+            return false
+        })
+    }
+
+
+    $(document).ready(function () {
+        invalidTopic()
+        convert()
+        addTopic()
+        updateTopic()
+    })
+    //    function compile() {
+    //
+    //        var text = $("#content").val();
+    //
+    //
+    //    }
+</script>
+{% endblock %}

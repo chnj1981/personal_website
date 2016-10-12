@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Simplue | {{ b.title }}{% endblock %}
+
+{% block import %}
+    <link rel="stylesheet" href="http://oexqautw4.bkt.clouddn.com/static/css/blog_content.css">
+    <script src="http://oexqautw4.bkt.clouddn.com/static/js/blog_content.js"></script>
+    <script>hljs.initHighlightingOnLoad()</script>
+
+
+{% endblock %}
+
+{% block container %}
+
+    <div class="container" data-id="{{ b.id }}">
+        <div class="border-std center-block shadow blog-item">
+            <h1><strong>{{ b.title }}</strong></h1>
+            <p class="timestamp">{{ b.created_time }}</p>
+            {% if user.id == 1 %}
+                <a class="btn btn-danger btn-block btn-delete-blog">删除博客</a>
+                <a class="btn btn-warning btn-block btn-edit-blog">编辑博客</a>
+            {% endif %}
+            <hr>
+            <div class="blog-content">{{ b.content|safe }}</div>
+
+            <hr>
+
+            <div class="row blog-content-nav">
+
+                <div class="col-xs-6 prev text-left">
+                    {% if prev_one is none %}
+                        <span>当前文章是最早的</span>
+                    {% else %}
+                        <a href={{ url_for('.content', id=prev_one.id) }}>前一篇:{{ prev_one.title }}</a>
+                    {% endif %}
+                </div>
+
+                <div class="col-xs-6 next text-right">
+                    {% if next_one is none %}
+                        <span>当前文章是最新的</span>
+                    {% else %}
+                        <a href={{ url_for('.content', id=next_one.id) }}>后一篇:{{ next_one.title }}</a>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="blog-comment border-std center-block shadow ">
+            <div class="comment-header row">
+                <div class="col-xs-4">
+                    <img class="img-grade center-block"
+                         src="http://oexqautw4.bkt.clouddn.com/static/img/fuck.png">
+                    <a href="#" class="btn btn-danger btn-block btn-grade grade-e">写的什么(XX)玩意儿(<span
+                        class="grade-e">{{ b.grade_e }}</span>)</a>
+                </div>
+                <div class="col-xs-4">
+                    <img class="img-grade center-block"
+                         src="http://oexqautw4.bkt.clouddn.com/static/img/soso.jpg">
+                    <a href="#" class="btn btn-warning btn-block btn-grade grade-c">你还差得远的呢(<span
+                        class="grade-c">{{ b.grade_c }}</span>)</a>
+                </div>
+                <div class="col-xs-4">
+                    <img class="img-grade center-block"
+                         src="http://oexqautw4.bkt.clouddn.com/static/img/ok.png">
+                    <a href="#"
+                       class="btn btn-success btn-block btn-grade grade-a">不分青红皂白且情不自禁的赞(<span
+                        class="grade-a">{{ b.grade_a }}</span>)</a>
+                </div>
+
+            </div>
+            <div class="comment-add">
+            <textarea class="form-control input-blog-comment" rows="3" maxlength="200" minlength="3"
+                      placeholder="劳烦用3~200字赐教"></textarea>
+                <button class="btn-blog-comment-add btn btn-primary btn-block disabled">指点一二
+                </button>
+            </div>
+            <div class="comment-cells">
+                {% for c in b.comments %}
+                    <div class="comment-item row">
+                        <div class="col-xs-1 u-avatar"><img src="{{ c.user.avatar }}"
+                                                            class="img-l img-rounded"></div>
+                        <div class="col-xs-8 u-comment">
+                            <p>{{ c.user.nickname }}</p>
+                            <p>{{ c.comment|safe }}</p>
+                            <p class="timestamp">{{ c.created_time }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        htmlToMarkdown('.blog-content')
+    </script>
+{% endblock %}

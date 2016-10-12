@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}Simplue | 论坛节点编辑 {% endblock %}
+
+{% block container %}
+
+    <div class="container">
+        <input type="text" class="form-control input-nodename" minlength="1" maxlength="10"
+               placeholder="url的名称">
+        <hr>
+
+        <input type="text" class="form-control input-showname" minlength="1" maxlength="10"
+               placeholder="显示的名称">
+        <hr>
+        <select class="form-control select-node">
+            <option data-id="0">新的父节点</option>
+            {% for n in node_list %}
+                <option data-id="{{ n.id }}">{{ n.show_name }}</option>
+            {% endfor %}
+        </select>
+        <a href="#" class="btn btn-block btn-success btn-add-node disabled">新增节点</a>
+        <hr>
+
+        {% for n in node_list %}
+            <div class="row node-item" data-id="{{ n.id }}">
+                <div class="col-xs-2">
+                    <a href="{{ url_for('forum.board', nodename=n.name) }}">{{ n.show_name }}</a>
+                </div>
+                <div class="col-xs-offset-8 col-xs-1">
+                    <a class="btn btn-warning " href="#">修改</a></div>
+                <div class="col-xs-1">
+                    <a class="btn btn-danger btn-delete-node" href="#">删除</a>
+                </div>
+            </div>
+            <hr>
+            {% for c in Node.query.filter_by(parent_id=n.id) %}
+                <div class="row node-item" data-id="{{ c.id }}">
+                    <div class="col-xs-offset-1 col-xs-2 ">
+                        <a href="{{ url_for('forum.board', nodename=c.name) }}">>> {{ c.show_name }}</a>
+                    </div>
+                    <div class="col-xs-offset-7 col-xs-1">
+                        <a class="btn btn-warning " href="#">修改</a>
+                    </div>
+                    <div class="col-xs-1">
+                        <a class="btn btn-danger btn-delete-node" href="#">删除</a>
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
+
+        {% endfor %}
+    </div>
+
+
+{% endblock %}
+
+{% block script %}
+    <script>
+
+        reset = function () {
+            alertify.set({
+                labels: {
+                    ok: "确认",
+                    cancel: "取消"
+                },
+                delay: 5000,
+                buttonReverse: false,
+                buttonFocus: "ok"
+            });
+        };
+
+
+        var btnActive = function () {
+            $('.btn-add-node').click(function () {
+                if ($(this).hasClass('disabled')) {
+                    return false
+                }
+
+                alertify.confirm("新增节点确认", function (e) {
+                    if (e) {
+                        addNode()
+                        alertify.success("已提交");
+                    } else {
+                        alertify.error("已取消");
+                    }
+                });
+
+                return false
+            })
+
+            $('.btn-delete-node').click(function () {
+                var node_id = $(this).closest('.node-item').data('id')
+                alertify.confirm("删除节点确认", function (e) {
+                    if (e) {
+                        deleteNode(node_id)
+                        alertify.success("已提交");
+                    } else {
+                        alertify.error("已取消");
+                    }
+                });
+
+                return false
+            })
+
+        }
+
+        var deleteNode = function (node_id) {
+            var response = function (r) {
+                if (r.success) {
+                    alertify.success(r.message)
+                    location.reload()
+
+                } else {
+                    alertify.error(r.message)
+                }
+            }
+            api.deleteNode(node_id, response)
+        }
+
+        var addNode = function () {
+            var nodename = $('.input-nodename').val()
+            var parent_id = $(".select-node").find("option:selected").data('id')
+            var showname = $('.input-showname').val()
+            var data = {
+                name: nodename,
+                parent_id: parent_id,
+                show_name: showname
+            }
+//        return false
+            var response = function (r) {
+                if (r.success) {
+                    alertify.success(r.message)
+                    location.reload()
+
+                } else {
+                    alertify.error(r.message)
+                }
+            }
+            api.addNode(data, response)
+            log(data)
+        }
+
+
+        $(document).ready(
+            function () {
+                reset()
+                btnActive()
+                checkSubmit('.input-nodename', '.btn-add-node', 1)
+            }
+        )
+
+    </script>
+{% endblock %}

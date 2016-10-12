@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Simplue | {{ t.title }}{% endblock %}
+
+{% block import %}
+    <link rel="stylesheet" href="http://oexqautw4.bkt.clouddn.com/static/css/topic_content.css">
+    <script src="http://oexqautw4.bkt.clouddn.com/static/js/topic_content.js"></script>
+    <script>hljs.initHighlightingOnLoad()</script>
+
+
+{% endblock %}
+
+{% block container %}
+
+    <div class="container" data-id="{{ t.id }}">
+        <div class="border-std center-block shadow topic-item">
+            <h1><strong>{{ t.title }}</strong></h1>
+            <p><img src={{ t.user.avatar }} class="img-m img-rounded"> <a
+                href={{ url_for('user.profile', id=t.user.id) }}>{{ t.user.nickname }}</a>&nbsp;发布于:<span
+                class="timestamp">{{ t.created_time }}</span> &nbsp;最近更新:<span
+                class="timestamp">{{ t.updated_time }}</span></p>
+
+            {% if user.id == 1 %}
+                <a class="btn btn-danger btn-block btn-delete-topic"
+                   href="{{ url_for('.delete', id=t.id) }}">删除帖子</a>
+                <a class="btn btn-warning btn-block btn-edit-topic"
+                   href="{{ url_for('.edit', id=t.id) }}">编辑帖子</a>
+                <h4><span class="label label-danger">帖子更新时间间隔至少一小时, 写这句话的人除外 </span></h4>
+            {% elif user.id == t.user.id %}
+                <a class="btn btn-warning btn-block btn-edit-topic"
+                   href="{{ url_for('.edit', id=t.id) }}">编辑帖子</a>
+                <h3><span class="label label-danger">帖子更新时间间隔至少一小时, 写这句话的人除外 </span></h3>
+
+            {% endif %}
+            <hr>
+            <div class="topic-content">{{ t.content|safe }}</div>
+
+        </div>
+
+        <div class="topic-comment border-std center-block shadow ">
+            <div class="comment-add">
+            <textarea class="form-control input-topic-comment" rows="3" maxlength="1000"
+                      minlength="3" placeholder="3字以上 支持部分常用的Markdown语法"></textarea>
+                <div class="comment-preview">预览(仅供参考, 实际显示可能存在差异)</div>
+                <button class="btn-topic-comment-add btn btn-primary btn-block disabled">评 论
+                </button>
+            </div>
+            <div class="comment-cells">
+                {% for c in t.comments %}
+                    <div class="comment-item row">
+                        <div class="col-xs-1 u-avatar"><img src="{{ c.user.avatar }}"
+                                                            class="img-l img-rounded"></div>
+                        <div class="col-xs-8 u-comment">
+                            <p><a
+                                href={{ url_for("user.profile", id=c.user.id) }}>{{ c.user.nickname }}</a>
+                            </p>
+                            <p class="comment-content">{{ c.content|safe }}</p>
+                            <p class="timestamp">{{ c.created_time }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        var convert = function () {
+            $('.input-topic-comment').keyup(function () {
+                var converter = new showdown.Converter();
+                //支持显示如同github的勾选框，默认false
+                //ep: - [x] This task is done
+                converter.setOption("tasklists", true);
+                //支持显示table，默认false
+                converter.setOption("tables", true);
+                //支持图片大小设置，默认为false
+//        converter.setOption("parseImgDimensions", true);
+                /**
+                 **更多地请看https://github.com/showdownjs/showdown文档
+                 **/
+                var html = converter.makeHtml($(this).val());
+                $(".comment-preview").html(html);
+
+                var code = $(".comment-preview pre code")
+                code.each(function (i, block) {
+                    hljs.highlightBlock(block);
+                });
+            })
+        }
+
+        htmlToMarkdown('.topic-content')
+        htmlToMarkdown('.comment-content')
+        convert()
+
+    </script>
+{% endblock %}

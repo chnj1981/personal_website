@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block title %}Simplue | 博客编辑{% endblock %}
+{% block import %}
+    <style>
+
+        .row {
+            margin-top: 80px;
+        }
+
+        #result {
+            border: 1px solid grey;
+            overflow: auto;
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        #result, #content {
+            height: 700px !important;
+            padding: 6px 12px;
+        }
+
+        #title {
+            margin-bottom: 20px;
+        }
+
+
+    </style>
+
+
+{% endblock %}
+
+{% block container %}
+    <div>
+        {% if blog is none %}
+
+            <div class="row center-block blog">
+                <div class="col-xs-12">
+            <textarea id="title" class="form-control" minlength="1" maxlength="20" rows="1"
+                      placeholder="标题1-20字" autofocus></textarea>
+                </div>
+
+                <div class="col-xs-6">
+                    <textarea id="content" class="form-control" rows="50"
+                              placeholder="内容"></textarea>
+                </div>
+
+                <div class="col-xs-6">
+                    <div id="result">预览</div>
+                </div>
+
+                <div class="col-xs-12">
+                    <a href="#" class="center-block btn btn-success btn-block btn-add-blog">添加博客</a>
+                </div>
+
+            </div>
+
+        {% else %}
+
+            <div class="row center-block blog" data-id="{{ blog.id }}">
+                <div class="col-xs-12">
+            <textarea id="title" class="form-control" minlength="1" maxlength="20" rows="1"
+                      placeholder="标题1-20字" autofocus>{{ blog.title }}</textarea>
+                </div>
+
+                <div class="col-xs-6">
+                    <textarea id="content" class="form-control" rows="50"
+                              placeholder="内容">{{ blog.content }}</textarea>
+                </div>
+
+                <div class="col-xs-6">
+                    <div id="result">预览</div>
+                </div>
+
+                <div class="col-xs-12">
+                    <a href="#"
+                       class="center-block btn btn-warning btn-block btn-update-blog">更新博客</a>
+                </div>
+
+            </div>
+        {% endif %}
+
+
+    </div>
+    <script type="text/javascript">
+        var convert = function () {
+            $('#content').keyup(function () {
+                var converter = new showdown.Converter();
+                converter.setOption("tasklists", true);
+                converter.setOption("tables", true);
+                var html = converter.makeHtml($(this).val());
+                $("#result").html(html);
+
+                $('pre code').each(function (i, block) {
+                    log(block, i)
+                    hljs.highlightBlock(block);
+                });
+            })
+        }
+
+        var updateBlog = function () {
+            $('.btn-update-blog').click(function () {
+                    var title = $('#title').val()
+                    var content = $('#content').val()
+                    var form = {
+                        title: title,
+                        content: filterXSS(content)
+                    }
+
+                    var response = function (r) {
+                        if (r.success) {
+                            alert(r.message)
+                            location.href = '/blog'
+                        } else {
+                            alert(r.message)
+                        }
+
+                    }
+
+                    var id = $('.blog').data('id')
+                    api.updateBlog(id, form, response)
+                    return false
+
+                }
+            )
+        }
+
+        var addBlog = function () {
+            $('.btn-add-blog').click(function () {
+                    var title = $('#title').val()
+                    var content = $('#content').val()
+                    var form = {
+                        title: filterXSS(title),
+                        content: filterXSS(content)
+                    }
+
+                    var response = function (r) {
+                        if (r.success) {
+                            alert(r.message)
+                            location.href = '/blog'
+                        } else {
+                            alert(r.message)
+                        }
+
+                    }
+                    api.addBlog(form, response)
+                    return false
+
+                }
+            )
+        }
+
+
+        $(document).ready(function () {
+            convert()
+            addBlog()
+            updateBlog()
+        })
+    </script>
+{% endblock %}

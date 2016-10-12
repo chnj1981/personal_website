@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Simplue | 博客{% endblock %}
+
+{% block import %}
+    <link rel="stylesheet" href="http://oexqautw4.bkt.clouddn.com/static/css/blog_index.css">
+    <script src="http://oexqautw4.bkt.clouddn.com/static/js/blog.js"></script>
+    <script>codeHighlight()</script>
+
+{% endblock %}
+
+{% block container %}
+    <div class="container ">
+        {% if user.id == 1 %}
+            <a class="btn btn-success btn-block" href={{ url_for('.new') }}>发布新博客</a>
+        {% endif %}
+        {% for b in blogs %}
+            <div class="col-xs-12 blog-item border-std shadow">
+                <h2><strong>{{ b.title }}</strong></h2>
+                <strong><p class="timestamp">{{ b.created_time }}</p></strong>
+                {#
+        <div class="blog-content">{{ '\n'.join(b.content.split('\n', 10)[:-1]) }}</div>
+        #}
+                <div class="blog-content">{{ b.content|safe }}</div>
+                <p><a class="btn btn-block btn-primary btn-read-all"
+                      href={{ url_for("blog.content", id=b.id) }}>阅读全文</a></p>
+            </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        htmlToMarkdown('.blog-content')
+    </script>
+{% endblock %}

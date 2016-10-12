@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Siplue | 个人资料{% endblock %}
+
+{% block import %}
+<style>
+    .user-profile {
+        padding: 20px 0 10px;
+    }
+</style>
+{% endblock %}
+
+{% block container %}
+<div class="container">
+    <div class="border-std shadow user-profile">
+        {% if user.id == view_user.id %}
+        <form class="form-horizontal" role="form" method="post"
+              action="{{ url_for('user.profile_update') }}">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">用户名:</label>
+                <div class="col-xs-10">
+                    <p class="form-control-static">{{ user.username }}&nbsp;(仅用户自身可见)</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-2 control-label">昵称:</label>
+                <div class="col-xs-10">
+                    <p class="form-control-static">{{ user.nickname }}</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-2 control-label">头像:</label>
+                <div class="col-xs-8">
+                    <input type="text" class="form-control" id="input-avatar" placeholder="头像外链"
+                           name="avatar" value="{{ user.avatar }}">
+                    <span class="help-block">请使用图片外链</span>
+                    <div class="img-preview">
+                        预览：大大大大&nbsp;<img src="{{ user.avatar }}" class="img-xl img-rounded preview">
+                        大大大&nbsp;<img src="{{ user.avatar }}" class="img-l img-rounded preview">
+                        大大&nbsp;<img src="{{ user.avatar }}" class="img-m img-rounded preview">
+                        大&nbsp;<img src="{{ user.avatar }}" class="img-s img-rounded preview">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-group hide">
+                <label class="col-xs-2 control-label">ID:</label>
+                <div class="col-xs-8">
+                    <input id="input-id" name="id" value="{{ user.id }}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-2 control-label">邮箱:</label>
+                <div class="col-xs-8">
+                    <input type="email" class="form-control" id="inputr-email" maxlength="80"
+                           name="email" value="{{ user.email }}"
+                           placeholder="邮箱">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-2 control-label">QQ/微信:</label>
+                <div class="col-xs-8">
+                    <input type="text" class="form-control" maxlength="20" id="input-chat"
+                           name="qq" placeholder="QQ/微信" value="{{ user.qq }}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-2 control-label">GitHub:</label>
+                <div class="col-xs-8">
+                    <input type="text" class="form-control" maxlength="50" id="input-github"
+                           name="github" placeholder="GitHub主页" value="{{ user.github }}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-5">
+                    <button type="submit" class="btn btn-danger">保存修改</button>
+                </div>
+            </div>
+
+        </form>
+        {% else %}
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-xs-2 control-label">昵称:</label>
+                <div class="col-xs-10">
+                    <p class="form-control-static">{{ view_user.nickname }}</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-2 control-label">头像:</label>
+                <div class="col-xs-8">
+                    <div class="img-preview">
+                        <img src="{{ view_user.avatar }}" class="img-xl img-rounded preview">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-2 control-label">邮箱:</label>
+                <div class="col-xs-8">
+                    <p class="form-control-static">{{ view_user.email }}</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-2 control-label">QQ/微信:</label>
+                <div class="col-xs-8">
+                    <p class="form-control-static">{{ view_user.qq }}</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-2 control-label">GitHub:</label>
+                <div class="col-xs-8">
+                    {% if view_user.github is not none %}
+                    <p class="form-control-static"><a href="{{ view_user.github }}">{{ view_user.github }}</a></p>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    var avatarPreviw = function () {
+        $('#input-avatar').keyup(function () {
+            log('fuck')
+//            var preview = $('.img-preview')
+            var url = $(this).val()
+            $('img.preview').each(function () {
+                $(this).attr({src: url})
+            })
+        })
+        $('.img-preview')
+    }
+
+    $(document).ready(function () {
+        avatarPreviw()
+
+    })
+</script>
+{% endblock %}
+
