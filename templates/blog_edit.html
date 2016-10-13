@@ -24,7 +24,6 @@
             margin-bottom: 20px;
         }
 
-
     </style>
 
 
@@ -88,7 +87,7 @@
                 var converter = new showdown.Converter();
                 converter.setOption("tasklists", true);
                 converter.setOption("tables", true);
-                var html = converter.makeHtml($(this).val());
+                var html = converter.makeHtml(filterXSS($(this).val()));
                 $("#result").html(html);
 
                 $('pre code').each(function (i, block) {

@@ -84,7 +84,6 @@ class Blog(db.Model, ModelMixin):
 class BlogComment(db.Model, ModelMixin):
     __tablename__ = 'blog_comments'
 
-    # 下面是字段定义
     id = db.Column(db.Integer, primary_key=True)
     comment = db.Column(db.String(200))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))

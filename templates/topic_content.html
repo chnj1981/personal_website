@@ -4,7 +4,7 @@
 
 {% block import %}
     <link rel="stylesheet" href="http://oexqautw4.bkt.clouddn.com/static/css/topic_content.css">
-    <script src="http://oexqautw4.bkt.clouddn.com/static/js/topic_content.js"></script>
+    <script src="/static/js/topic_content.js"></script>
     <script>hljs.initHighlightingOnLoad()</script>
 
 
@@ -15,8 +15,8 @@
     <div class="container" data-id="{{ t.id }}">
         <div class="border-std center-block shadow topic-item">
             <h1><strong>{{ t.title }}</strong></h1>
-            <p><img src={{ t.user.avatar }} class="img-m img-rounded"> <a
-                href={{ url_for('user.profile', id=t.user.id) }}>{{ t.user.nickname }}</a>&nbsp;发布于:<span
+            <p><img src="{{ t.user.avatar }}" class="img-m img-rounded"> <a
+                href="{{ url_for('user.profile', id=t.user.id) }}">{{ t.user.nickname }}</a>&nbsp;发布于:<span
                 class="timestamp">{{ t.created_time }}</span> &nbsp;最近更新:<span
                 class="timestamp">{{ t.updated_time }}</span></p>
 
@@ -33,7 +33,7 @@
 
             {% endif %}
             <hr>
-            <div class="topic-content">{{ t.content|safe }}</div>
+            <div class="topic-content">{{ t.content }}</div>
 
         </div>
 
@@ -52,9 +52,9 @@
                                                             class="img-l img-rounded"></div>
                         <div class="col-xs-8 u-comment">
                             <p><a
-                                href={{ url_for("user.profile", id=c.user.id) }}>{{ c.user.nickname }}</a>
+                                href="{{ url_for('user.profile', id=c.user.id) }}">{{ c.user.nickname }}</a>
                             </p>
-                            <p class="comment-content">{{ c.content|safe }}</p>
+                            <p class="comment-content">{{ c.content }}</p>
                             <p class="timestamp">{{ c.created_time }}</p>
                         </div>
                     </div>
@@ -71,17 +71,10 @@
         var convert = function () {
             $('.input-topic-comment').keyup(function () {
                 var converter = new showdown.Converter();
-                //支持显示如同github的勾选框，默认false
-                //ep: - [x] This task is done
                 converter.setOption("tasklists", true);
-                //支持显示table，默认false
                 converter.setOption("tables", true);
-                //支持图片大小设置，默认为false
-//        converter.setOption("parseImgDimensions", true);
-                /**
-                 **更多地请看https://github.com/showdownjs/showdown文档
-                 **/
-                var html = converter.makeHtml($(this).val());
+
+                var html = converter.makeHtml(filterXSS($(this).val()));
                 $(".comment-preview").html(html);
 
                 var code = $(".comment-preview pre code")

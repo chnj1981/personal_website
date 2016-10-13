@@ -26,7 +26,6 @@ class Node(db.Model, ModelMixin):
         print('board.update, ', form)
 
     def save_node(self):
-        print('save_node into')
         if 11 > len(self.name) > 0:
             if Node.query.filter_by(name=self.name).first() is None:
                 self.save()

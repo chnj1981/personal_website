@@ -50,9 +50,9 @@
                 <img class="col-xs-1 " src="http://oexqautw4.bkt.clouddn.com/static/img/lovebug.jpg"
                      style="width: 150px">
             </div>
-            <a class="btn btn-danger btn-block" href={{ url_for('.new') }}>捉到臭虫 / 提交意见或建议</a>
+            <a class="btn btn-danger btn-block" href="{{ url_for('.new') }}">捉到臭虫 / 提交意见或建议</a>
         {% else %}
-            <a class="btn btn-primary btn-block" href={{ url_for('.new') }}>水</a>
+            <a class="btn btn-primary btn-block" href="{{ url_for('.new') }}">水</a>
         {% endif %}
 
         <div class="row">
@@ -64,7 +64,7 @@
 
                     <div class="col-xs-10 topic-item-main">
                         <a class="topic-title"
-                           href={{ url_for('.show', id=t.id) }}>{{ t.title|safe }}</a>
+                           href="{{ url_for('.show', id=t.id) }}">{{ t.title }}</a>
                         <h4 style="float: right">
                             <span
                                 class="label label-primary">{{ t.comments_num }}/{{ t.views }}</span>
@@ -79,7 +79,7 @@
 
                             <div class="topic-info-item topic-info-author">
                                 •&nbsp;<a
-                                href={{ url_for('user.profile', id=t.user.id) }}>{{ t.user.nickname }}</a>&nbsp;&nbsp;
+                                href="{{ url_for('user.profile', id=t.user.id) }}">{{ t.user.nickname }}</a>&nbsp;&nbsp;
                             </div>
 
                             <div class="topic-info-item topic-info-status">
@@ -91,7 +91,7 @@
                                     •&nbsp;最后回复&nbsp;<span
                                     class="timestamp">{{ t.comments[0].created_time }}</span>
                                     &nbsp;来自
-                                    <a href={{ url_for('user.profile', id=t.comments[0].user.id) }}>{{ t.comments[0].user.nickname }}</a>
+                                    <a href="{{ url_for('user.profile', id=t.comments[0].user.id) }}>{{ t.comments[0].user.nickname }}"></a>
                                 {% endif %}
                             </div>
 
@@ -110,7 +110,7 @@
     <nav style="text-align: center; display: block">
         <ul class="pagination">
             {% if p.has_prev %}
-                <li><a href={{ url_for("forum.board", nodename=node, page=p.prev_num) }}>&laquo;</a>
+                <li><a href="{{ url_for('forum.board', nodename=node, page=p.prev_num) }}">&laquo;</a>
                 </li>
             {% endif %}
 
@@ -118,14 +118,14 @@
                 {% if i == p.page %}
                     <li class="disabled"><a>{{ i }}</a></li>
                 {% else %}
-                    <li><a href={{ url_for("forum.board",  nodename=node, page=i) }}>{{ i }}</a>
+                    <li><a href="{{ url_for('forum.board',  nodename=node, page=i) }}">{{ i }}</a>
                     </li>
                 {% endif %}
             {% endfor %}
 
             {% if p.has_next %}
                 <li><a
-                    href={{ url_for("forum.board",  nodename=node, page=p.next_num ) }}>&raquo;</a>
+                    href="{{ url_for('forum.board',  nodename=node, page=p.next_num ) }}">&raquo;</a>
                 </li>
             {% endif %}
         </ul>

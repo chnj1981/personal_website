@@ -47,10 +47,10 @@ class Weibo(db.Model, ModelMixin):
         else:
             w = update_weibo.strip()
         l = len(w)
-        if l <= 2:
+        if l < 3:
             return False, '微博太短了，不能少于 3 个字符'
-        elif l > 255:
-            return False, '微博太长了，不能超过 255 个字符'
+        elif l > 200:
+            return False, '微博太长了，不能超过 200 个字符'
         return True, '微博内容合法'
 
     def save_weibo(self, user):
@@ -111,10 +111,10 @@ class Comment(db.Model, ModelMixin):
     def valid(self):
         w = self.comment.strip()
         l = len(w)
-        if l < 3:
-            return False, '评论太短了，不能少于 3 个字符'
+        if l < 1:
+            return False, '评论太短了，不能少于 1 个字符'
         elif l > 100:
-            return False, '评论太长了，不能超过 255 个字符'
+            return False, '评论太长了，不能超过 100 个字符'
         return True, '评论内容合法'
 
     def save_comment(self, user, weibo):

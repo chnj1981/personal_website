@@ -1,4 +1,8 @@
 # Byte-compiled / optimized / DLL files
+app.py
+*.sqlite
+migrations/
+static/
 .idea/
 __pycache__/
 *.py[cod]

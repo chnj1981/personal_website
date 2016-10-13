@@ -38,7 +38,7 @@ def login():
 @main.route('/logout')
 @login_required
 def logout(user):
-    session.pop('user_id')
+    session.pop('user_id', None)
     return redirect(url_for('.index'))
 
 

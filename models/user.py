@@ -42,7 +42,8 @@ class User(db.Model, ModelMixin):
         self.captcha = form.get('captcha', '')
 
     def valid_register(self, ip):
-        if User.query.filter_by(ip_register=ip).first() is not None:
+        ip_user = User.query.filter_by(ip_register=ip).first()
+        if ip_user is not None and ip_user.id != 1:
             return None, '注册失败, 此IP已有注册用户, 如有需要, 请联系管理员'
         self.ip_register = ip
         valid_username = User.query.filter_by(username=self.username).first() == None

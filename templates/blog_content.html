@@ -21,7 +21,7 @@
                 <a class="btn btn-warning btn-block btn-edit-blog">编辑博客</a>
             {% endif %}
             <hr>
-            <div class="blog-content">{{ b.content|safe }}</div>
+            <div class="blog-content">{{ b.content }}</div>
 
             <hr>
 
@@ -31,7 +31,7 @@
                     {% if prev_one is none %}
                         <span>当前文章是最早的</span>
                     {% else %}
-                        <a href={{ url_for('.content', id=prev_one.id) }}>前一篇:{{ prev_one.title }}</a>
+                        <a href="{{ url_for('.content', id=prev_one.id) }}">前一篇:{{ prev_one.title }}</a>
                     {% endif %}
                 </div>
 
@@ -39,7 +39,7 @@
                     {% if next_one is none %}
                         <span>当前文章是最新的</span>
                     {% else %}
-                        <a href={{ url_for('.content', id=next_one.id) }}>后一篇:{{ next_one.title }}</a>
+                        <a href="{{ url_for('.content', id=next_one.id) }}">后一篇:{{ next_one.title }}</a>
                     {% endif %}
                 </div>
             </div>
@@ -82,7 +82,7 @@
                                                             class="img-l img-rounded"></div>
                         <div class="col-xs-8 u-comment">
                             <p>{{ c.user.nickname }}</p>
-                            <p>{{ c.comment|safe }}</p>
+                            <p>{{ c.comment }}</p>
                             <p class="timestamp">{{ c.created_time }}</p>
                         </div>
                     </div>

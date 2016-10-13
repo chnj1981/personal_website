@@ -131,18 +131,11 @@
     var convert = function () {
         $('#content').keyup(function () {
             var converter = new showdown.Converter();
-            //支持显示如同github的勾选框，默认false
-            //ep: - [x] This task is done
             converter.setOption("tasklists", true);
-            //支持显示table，默认false
             converter.setOption("tables", true);
-            //支持图片大小设置，默认为false
-//        converter.setOption("parseImgDimensions", true);
-            /**
-             **更多地请看https://github.com/showdownjs/showdown文档
-             **/
-            var html = converter.makeHtml($(this).val());
+            var html = converter.makeHtml(filterXSS($(this).val()));
             $("#result").html(html);
+
 
             $('pre code').each(function (i, block) {
                 hljs.highlightBlock(block);
@@ -167,7 +160,6 @@
 
 
             var response = function (r) {
-                log(r, r.data)
                 if (r.success) {
                     alert(r.message)
                     var data = r.data
@@ -209,13 +201,11 @@
             var response = function (r) {
                 if (r.success) {
                     alert(r.message)
-                    log(r.data)
                     location.href = '/forum/topic/' + r.data.id
                 } else {
                     alert(r.message)
                 }
             }
-
             api.addTopic(form, response)
             return false
         })
@@ -228,11 +218,5 @@
         addTopic()
         updateTopic()
     })
-    //    function compile() {
-    //
-    //        var text = $("#content").val();
-    //
-    //
-    //    }
 </script>
 {% endblock %}

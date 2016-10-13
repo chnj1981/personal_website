@@ -129,7 +129,6 @@
         </form>
         {% endif %}
     </div>
-
 </div>
 {% endblock %}
 
@@ -137,8 +136,6 @@
 <script>
     var avatarPreviw = function () {
         $('#input-avatar').keyup(function () {
-            log('fuck')
-//            var preview = $('.img-preview')
             var url = $(this).val()
             $('img.preview').each(function () {
                 $(this).attr({src: url})
@@ -149,7 +146,6 @@
 
     $(document).ready(function () {
         avatarPreviw()
-
     })
 </script>
 {% endblock %}

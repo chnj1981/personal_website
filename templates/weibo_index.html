@@ -67,11 +67,11 @@
                                 </div>
                                 <div class="col-xs-10 wb-info">
                                     <div class=""><a
-                                        href={{ url_for('user.profile', id=top.user.id) }}>{{ top.user.nickname }}</a>
+                                        href="{{ url_for('user.profile', id=top.user.id) }}">{{ top.user.nickname }}</a>
                                     </div>
                                     <span>发布于: </span><span
                                     class="timestamp">{{ top.created_time }}</span>
-                                    <p class="wb-content">{{ top.weibo | safe }}</p>
+                                    <p class="wb-content">{{ top.weibo }}</p>
                                 </div>
                             </div>
 
@@ -91,8 +91,8 @@
                             </div>
 
                             <div class="wb-update " style="display: none;">
-                                <textarea class="form-control input-wb-update" maxlength="200"
-                                          rows="3">{{ top.weibo | safe }}</textarea>
+                                <textarea class="form-control input-wb-update" minlength="3" maxlength="200"
+                                          rows="3">{{ top.weibo }}</textarea>
                                 <a href="#"
                                    class="btn-wb-update-submit btn btn-warning btn-block disabled">提
                                     交</a>
@@ -101,7 +101,7 @@
                             <div class="wb-comment " style="display: none;">
 
                                 <div class="wb-comment-add">
-                        <textarea class="form-control input-wb-comment" maxlength="100" rows="2"
+                        <textarea class="form-control input-wb-comment" minlength="1" maxlength="100" rows="2"
                                   placeholder="100字以内"></textarea>
                                     <a class="btn btn-primary btn-wb-comment-add btn-block disabled">打倒管理员</a>
                                 </div>
@@ -115,7 +115,7 @@
                                             </div>
                                             <div class="col-xs-10">
                                                 <p>
-                                                    <a href="#">{{ c.user.nickname }}</a><span> : </span>{{ c.comment|safe }}
+                                                    <a href="#">{{ c.user.nickname }}</a><span> : </span>{{ c.comment }}
                                                 </p>
                                                 <span class="timestamp">{{ c.created_time }}</span>
                                             </div>
@@ -138,11 +138,11 @@
                                 </div>
                                 <div class="col-xs-10 wb-info">
                                     <div class=""><a
-                                        href={{ url_for('user.profile', id=w.user.id) }}>{{ w.user.nickname }}</a>
+                                        href="{{ url_for('user.profile', id=w.user.id) }}">{{ w.user.nickname }}</a>
                                     </div>
                                     <span>发布于: </span><span
                                     class="timestamp">{{ w.created_time }}</span>
-                                    <p class="wb-content">{{ w.weibo | safe }}</p>
+                                    <p class="wb-content">{{ w.weibo }}</p>
                                 </div>
                             </div>
 
@@ -164,8 +164,8 @@
                             </div>
 
                             <div class="wb-update " style="display: none;">
-                                <textarea class="form-control input-wb-update" maxlength="200"
-                                          rows="3">{{ w.weibo | safe }}</textarea>
+                                <textarea class="form-control input-wb-update" minlength="3" maxlength="200"
+                                          rows="3">{{ w.weibo }}</textarea>
 
                                 <a href="#"
                                    class="btn-wb-update-submit btn btn-warning btn-block disabled">提
@@ -175,7 +175,7 @@
                             <div class="wb-comment " style="display: none;">
 
                                 <div class="wb-comment-add">
-                            <textarea class="form-control input-wb-comment" maxlength="100" rows="2"
+                            <textarea class="form-control input-wb-comment" minlength="1" maxlength="100" rows="2"
                                       placeholder="100字以内"></textarea>
                                     <a class="btn btn-primary btn-wb-comment-add btn-block disabled">批判一番</a>
                                 </div>
@@ -190,7 +190,7 @@
                                             </div>
                                             <div class="col-xs-10">
                                                 <p>
-                                                    <a href="#">{{ c.user.nickname }}</a><span> : </span>{{ c.comment|safe }}
+                                                    <a href="#">{{ c.user.nickname }}</a><span> : </span>{{ c.comment }}
                                                 </p>
                                                 <span class="timestamp">{{ c.created_time }}</span>
                                             </div>
@@ -245,19 +245,19 @@
     <nav style="text-align: center; display: block">
         <ul class="pagination">
             {% if p.has_prev %}
-                <li><a href={{ url_for("weibo.index", page=p.prev_num) }}>&laquo;</a></li>
+                <li><a href="{{ url_for('weibo.index', page=p.prev_num) }}">&laquo;</a></li>
             {% endif %}
 
-            {% for i in range(1, p.pages+1) %}
+            {% for i in range(1, p.pages + 1) %}
                 {% if i == p.page %}
                     <li class="disabled"><a>{{ i }}</a></li>
                 {% else %}
-                    <li><a href={{ url_for("weibo.index", page=i) }}>{{ i }}</a></li>
+                    <li><a href="{{ url_for('weibo.index', page=i) }}">{{ i }}</a></li>
                 {% endif %}
             {% endfor %}
 
             {% if p.has_next %}
-                <li><a href={{ url_for("weibo.index", page=p.next_num ) }}>&raquo;</a></li>
+                <li><a href="{{ url_for('weibo.index', page=p.next_num ) }}">&raquo;</a></li>
             {% endif %}
         </ul>
     </nav>

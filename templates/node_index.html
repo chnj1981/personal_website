@@ -5,11 +5,11 @@
 {% block container %}
 
     <div class="container">
-        <input type="text" class="form-control input-nodename" minlength="1" maxlength="10"
+        <input type="text" class="form-control input-nodename" minlength="1" maxlength="100"
                placeholder="url的名称">
         <hr>
 
-        <input type="text" class="form-control input-showname" minlength="1" maxlength="10"
+        <input type="text" class="form-control input-showname" minlength="1" maxlength="100"
                placeholder="显示的名称">
         <hr>
         <select class="form-control select-node">
@@ -126,7 +126,7 @@
                 parent_id: parent_id,
                 show_name: showname
             }
-//        return false
+
             var response = function (r) {
                 if (r.success) {
                     alertify.success(r.message)
@@ -137,9 +137,7 @@
                 }
             }
             api.addNode(data, response)
-            log(data)
         }
-
 
         $(document).ready(
             function () {

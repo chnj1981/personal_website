@@ -11,22 +11,19 @@ class TopicComment(db.Model, ModelMixin):
     topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'))
 
     def __init__(self, form):
-        print('comment init', form)
         self.content = form.get('content', '')
         self.created_time = timestamp()
         self.updated_time = timestamp()
 
     def valid(self):
-        return 200 > len(self.content) > 3
+        return 800 > len(self.content) > 3
 
     def add(self, user, topic):
-        print('进入add')
         if self.valid():
             self.user = user
             self.topic = topic
             self.save()
             topic.comments_num += 1
-            print(timestamp())
             topic.order_time = timestamp()
             topic.save()
             return True, self.response(), '评论成功'
@@ -62,7 +59,6 @@ class Topic(db.Model, ModelMixin):
     board_id = db.Column(db.Integer, db.ForeignKey('nodes.id'))
 
     def __init__(self, form):
-        print('topic init', form)
         self.title = form.get('title', '')
         self.content = form.get('content', '')
         self.board_id = form.get('board_id', 0)
@@ -71,24 +67,23 @@ class Topic(db.Model, ModelMixin):
         self.updated_time = timestamp()
 
     def update(self, form):
-        print('topic update', form)
         self.title = form.get('title', '')
         self.content = form.get('content', '')
         self.updated_time = timestamp()
         if self.valid():
             self.save()
             return True, self.response(), '更新成功'
-        return False, None, '更新失败, 请检查帖子格式'
+        return False, None, '更新失败, 标题1-100字, 内容 20-5000字, 请仔细检查格式'
 
     def valid(self):
-        return 1 < len(self.title) < 100 and 20 < len(self.content) < 5000
+        return 0 < len(self.title) < 100 and 20 < len(self.content) < 5000
 
     def add(self, user):
         if self.valid():
             self.user = user
             self.save()
             return True, self.response(), '成功发布帖子'
-        return False, None, '帖子格式不合法, 请仔细检查格式, 标题'
+        return False, None, '帖子格式不合法, 标题1-100字, 内容 20-5000字, 请仔细检查格式'
 
     def response(self):
         return {

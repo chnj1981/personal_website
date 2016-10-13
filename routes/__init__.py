@@ -8,6 +8,7 @@ from flask import send_from_directory
 from flask import session
 from flask import url_for
 from flask import abort
+from routes.black import black_list
 
 from functools import wraps
 import json
@@ -51,6 +52,8 @@ def login_required(f):
         u = current_user()
         if u is None:
             return redirect(url_for('user.index'))
+        if u.id in black_list:
+            abort(404)
         return f(u, *args, **kwargs)
 
     return function
