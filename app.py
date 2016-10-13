@@ -18,10 +18,12 @@ from routes.weibo import main as routes_weibo
 from routes.blog import main as routes_blog
 from routes.weibo_api import main as routes_weibo_api
 
+import conf
+
 # from routes.chat import main as routes_chat
 
 app = Flask(__name__)
-db_path = '.sqlite'
+db_path = 'personal.sqlite'
 manager = Manager(app)
 
 
@@ -37,9 +39,9 @@ def register_routes(app):
 
 def configure_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-    app.secret_key = ''
+    app.secret_key = conf.SESSION_KEY
     # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}'.format(db_path)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:{}@localhost/personal'.format(conf.DB_PWD)
     db.init_app(app)
     register_routes(app)
 
