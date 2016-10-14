@@ -5,8 +5,6 @@
 {% block import %}
     <link rel="stylesheet" href="/static/css/blog_index.css">
     <script src="/static/js/blog.js"></script>
-    <script>codeHighlight()</script>
-
 {% endblock %}
 
 {% block container %}
@@ -18,17 +16,15 @@
             <div class="col-xs-12 blog-item border-std shadow">
                 <h2 class="en-break"><strong>{{ b.title }}</strong></h2>
                 <p class="timestamp">{{ b.created_time }}</p>
-                <div class="blog-content en-break">{{ b.content }}</div>
+                <div class="blog-content en-break" id="{{ b.id }}">{{ b.content }}</div>
                 <p><a class="btn btn-block btn-primary btn-read-all"
                       href="{{ url_for('blog.content', id=b.id) }}">阅读全文</a></p>
+                <script>
+                    htmlToMarkdown('#{{ b.id }}')
+                </script>
             </div>
+
         {% endfor %}
 
     </div>
-{% endblock %}
-
-{% block script %}
-    <script>
-        htmlToMarkdown('.blog-content')
-    </script>
 {% endblock %}
