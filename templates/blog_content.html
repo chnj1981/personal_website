@@ -21,7 +21,7 @@
                 <a class="btn btn-warning btn-block btn-edit-blog">编辑博客</a>
             {% endif %}
             <hr>
-            <div class="blog-content">{{ b.content }}</div>
+            <div class="blog-content en-break">{{ b.content }}</div>
 
             <hr>
 
@@ -80,7 +80,7 @@
                     <div class="comment-item row">
                         <div class="col-xs-1 u-avatar"><img src="{{ c.user.avatar }}"
                                                             class="img-l img-rounded"></div>
-                        <div class="col-xs-8 u-comment">
+                        <div class="col-xs-8 u-comment en-break">
                             <p>{{ c.user.nickname }}</p>
                             <p>{{ c.comment }}</p>
                             <p class="timestamp">{{ c.created_time }}</p>

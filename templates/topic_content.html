@@ -14,7 +14,7 @@
 
     <div class="container" data-id="{{ t.id }}">
         <div class="border-std center-block shadow topic-item">
-            <h1><strong>{{ t.title }}</strong></h1>
+            <h1 class="en-break"><strong>{{ t.title }}</strong></h1>
             <p><img src="{{ t.user.avatar }}" class="img-m img-rounded"> <a
                 href="{{ url_for('user.profile', id=t.user.id) }}">{{ t.user.nickname }}</a>&nbsp;发布于:<span
                 class="timestamp">{{ t.created_time }}</span> &nbsp;最近更新:<span
@@ -33,7 +33,7 @@
 
             {% endif %}
             <hr>
-            <div class="topic-content">{{ t.content }}</div>
+            <div class="topic-content en-break">{{ t.content }}</div>
 
         </div>
 
@@ -54,7 +54,7 @@
                             <p><a
                                 href="{{ url_for('user.profile', id=c.user.id) }}">{{ c.user.nickname }}</a>
                             </p>
-                            <p class="comment-content">{{ c.content }}</p>
+                            <p class="comment-content en-break">{{ c.content }}</p>
                             <p class="timestamp">{{ c.created_time }}</p>
                         </div>
                     </div>
