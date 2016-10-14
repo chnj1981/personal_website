@@ -29,13 +29,13 @@ var goTop = function () {
     });
 
     top.mouseover(function (e) {
-        $(this).css("background", "url(/static/img/backtop.png) no-repeat 0px 0px");
+        $(this).css("background", "url(http://oexqautw4.bkt.clouddn.com/static/img/backtop.png) no-repeat 0px 0px");
         $(this).css('cursor', 'pointer');
         $(this).css('opacity', '1');
     });
 
     top.mouseout(function (e) {
-        $(this).css("background", "url(/static/img/backtop.png) no-repeat -70px 0px");
+        $(this).css("background", "url(http://oexqautw4.bkt.clouddn.com/static/img/backtop.png) no-repeat -70px 0px");
         $(this).css("opacity", "0.5");
     });
 
