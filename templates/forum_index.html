@@ -91,7 +91,7 @@
                                     •&nbsp;最后回复&nbsp;<span
                                     class="timestamp">{{ t.comments[0].created_time }}</span>
                                     &nbsp;来自
-                                    <a href="{{ url_for('user.profile', id=t.comments[0].user.id) }}>{{ t.comments[0].user.nickname }}"></a>
+                                    <a href="{{ url_for('user.profile', id=t.comments[0].user.id) }}">{{ t.comments[0].user.nickname }}</a>
                                 {% endif %}
                             </div>
 
