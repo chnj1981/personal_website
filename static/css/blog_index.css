@@ -10,7 +10,7 @@
     max-height: 500px;
     overflow: hidden;
     /*box-shadow: 0 -9px 15px -12px rgba(0, 0, 0, 0.7) inset;*/
-    /*background: -webkit-gradient(linear, 0% 80%, 0% 100%, from(black), to(white));*/
+    background: -webkit-gradient(linear, 0% 80%, 0% 100%, from(black), to(white));
     /*color: transparent;*/
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
