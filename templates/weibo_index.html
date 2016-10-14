@@ -3,8 +3,8 @@
 {% block title %}Simplue | 微博{% endblock %}
 
 {% block import %}
-    <link rel="stylesheet" href="http://oexqautw4.bkt.clouddn.com/static/css/weibo.css">
-    <script src="http://oexqautw4.bkt.clouddn.com/static/js/weibo.js"></script>
+    <link rel="stylesheet" href="/static/css/weibo.css">
+    <script src="/static/js/weibo.js"></script>
 {% endblock %}
 
 {% block container %}
@@ -142,7 +142,7 @@
                                     </div>
                                     <span>发布于: </span><span
                                     class="timestamp">{{ w.created_time }}</span>
-                                    <p class="wb-content">{{ w.weibo }}</p>
+                                    <p class="wb-content col-xs-10">{{ w.weibo }}</p>
                                 </div>
                             </div>
 

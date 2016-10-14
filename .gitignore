@@ -1,8 +1,10 @@
 # Byte-compiled / optimized / DLL files
-app.py
+*.default.css
+*.min.js
+*.min.css
 *.sqlite
 migrations/
-static/
+static/img/
 .idea/
 __pycache__/
 *.py[cod]

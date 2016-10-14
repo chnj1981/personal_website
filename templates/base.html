@@ -20,9 +20,9 @@
     <link rel="stylesheet" href="http://oexqautw4.bkt.clouddn.com/static/css/alertify.core.css">
     <link rel="stylesheet" href="http://oexqautw4.bkt.clouddn.com/static/css/alertify.default.css">
     <script src="http://oexqautw4.bkt.clouddn.com/static/js/alertify.min.js"></script>
-    <script src="http://oexqautw4.bkt.clouddn.com/static/js/utils.js"></script>
-    <script src="http://oexqautw4.bkt.clouddn.com/static/js/api.js"></script>
-    <link rel="stylesheet" href="http://oexqautw4.bkt.clouddn.com/static/css/base.css">
+    <script src="/static/js/utils.js"></script>
+    <script src="/static/js/api.js"></script>
+    <link rel="stylesheet" href="/static/css/base.css">
 
     {% block import %}
     {% endblock %}
@@ -59,7 +59,7 @@
 
             <li class="nav-item right user-dropdown">
                 <a href="{{ url_for('user.profile', id=user.id) }}"><img src="{{ user.avatar }}"
-                                                                           class="img-s img-rounded"><span>&nbsp;"{{ user.nickname }}"</span></a>
+                                                                           class="img-s img-rounded"><span>&nbsp;{{ user.nickname }}</span></a>
                 <div id='jiji' class="dropdown-content shadow">
                     <a class="gua-nav-item" href="{{ url_for('user.profile', id=user.id) }}">个人资料</a>
                     <a class="gua-nav-item" href="{{ url_for('user.logout') }}">登出</a>

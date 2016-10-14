@@ -1,0 +1,94 @@
+.container {
+    width: 1000px;
+}
+
+.wb-item {
+    margin-top: 10px;
+    padding: 0;
+}
+
+.wb-add {
+    margin-top: 10px;
+    padding: 10px 15px 12px;
+}
+
+.wb-item:hover {
+    margin-left: -8px;
+    margin-top: 7px;
+    margin-bottom: 1.5px;
+    border: 1px solid #e1e8ed;
+    box-shadow: 7px 7px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.billboard {
+    padding: 0 15px 12px;
+}
+
+.wb-cells {
+    padding: 0;
+}
+
+.row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.wb-nav ul {
+    padding-left: 65px;
+    margin-left: 1px;
+}
+
+.wb-main {
+    padding-top: 15px;
+}
+
+.wb-info {
+    padding-left: 29px;
+}
+
+.nav-tabs {
+    border-bottom: none;
+}
+
+.fuck-nav {
+    border-bottom: 1px solid #eee;
+}
+
+.img-bignews {
+    width: 255px;
+    margin-bottom: 10px;
+}
+
+.img-shakehand {
+    margin-top: 10px;
+    width: 94px;
+}
+
+.img-dj {
+    width: 226px;
+}
+
+.img-dancer {
+    width: 176px;
+}
+
+.wb-comment-item + .wb-comment-item {
+    border-top: 1px solid #eee;
+}
+
+.wb-comment-item {
+    padding: 5px;
+}
+
+.wb-comment-add, .wb-update {
+    padding: 10px 20px 15px;
+}
+
+.profile-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.wb-content {
+    margin:5px auto 1px;
+}

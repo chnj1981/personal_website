@@ -1,0 +1,58 @@
+.border-std {
+    margin-top: 20px;
+}
+
+.blog-item {
+    padding: 25px 40px 20px;
+}
+
+.border-std {
+    border-radius: 6px;
+}
+
+.blog-comment {
+    padding: 20px 20px 15px;
+}
+
+.comment-item + .comment-item {
+    border-top: 1px solid #eee;
+    padding-top: 13px;
+}
+
+.comment-add {
+    margin-bottom: 30px;
+}
+
+.comment-item {
+    padding-left: 30px;
+}
+
+.u-avatar {
+    padding: 5px 0 0 20px;
+}
+
+.u-comment {
+    margin-left: 10px;
+}
+
+.comment-header {
+    margin-bottom: 20px;
+}
+
+.img-grade {
+    width: 150px;
+    height: 150px;
+}
+
+.comment-header {
+    width: 90%;
+    margin: 0 auto 20px;
+}
+
+.comment-header .btn{
+    padding: 8px 0;
+}
+
+.blog-content-nav {
+
+}

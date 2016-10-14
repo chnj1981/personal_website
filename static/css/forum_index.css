@@ -1,0 +1,98 @@
+.topic-nav, .advice-bug {
+    margin: auto;
+    padding: 15px 30px 7px;
+
+}
+
+.img-nav {
+    width: 130px;
+    margin-left: 5px;
+}
+
+.row {
+    margin: 0;
+}
+
+.topic-item {
+    margin-top: 10px;
+    padding: 10px 20px;
+}
+
+.child-board {
+
+}
+
+.topic-nav-item + .topic-nav-item {
+    border-top: 2px solid #e1e8ed;
+}
+
+.topic-nav-item {
+    margin-bottom: 10px;
+    padding-top: 10px;
+}
+
+.container a {
+    color: #778087
+}
+
+.container a:hover {
+    color: #4d5256
+}
+
+a.btn {
+    color: white;
+}
+
+a.btn:hover {
+    color: white;
+}
+
+.advice-bug {
+    margin-top: 10px;
+    padding: 8px 20px 10px;
+}
+
+.goodnews {
+
+}
+
+.topic-item:hover {
+    margin-left: -12px;
+    margin-right: 12px;
+    margin-top: 5px;
+    margin-bottom: 3.5px;
+    border: 1px solid #e1e8ed;
+    box-shadow: 7px 7px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+.topic-info-item {
+    float: left;
+}
+
+.topic-info-author {
+    width: 160px;
+}
+
+.topic-info-board {
+    width: 90px;
+}
+
+.topic-info-status {
+    width: 300px;
+}
+
+.topic-info {
+    margin-top: 10px;
+}
+
+.topic-title {
+    font-size: 16px;
+}
+
+.topic-item-main{
+    padding-left: 0;
+}
+
+.topic-nav {
+    font-size: 15px;
+}

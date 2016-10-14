@@ -1,0 +1,64 @@
+html {
+    background: url(http://oexqautw4.bkt.clouddn.com/static/img/bg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+span.help-block {
+    color: white !important
+}
+
+body {
+    background-color: transparent;
+}
+
+.container {
+    width: 1024px;
+    margin-top: 60px;
+}
+
+.col-center-block {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    background: rgba(30, 62, 105, 0.3);
+    padding: 1px 15px 20px;
+    color: white;
+}
+
+.logo {
+    width: 230px;
+    margin-left: 22px;
+}
+
+.login, .register {
+    width: 310px;
+}
+
+.joke {
+    width: auto;
+    display: table;
+    margin-top: 130px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.disabled {
+    /*cursor: not-allowed !important;*/
+    pointer-events: auto!important;
+}
+
+.error-msgs {
+    background: lightcoral;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    padding: 3px;
+}

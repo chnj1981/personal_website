@@ -1,0 +1,22 @@
+.border-std {
+    margin-top: 20px;
+}
+
+.blog-item {
+    padding: 3px 30px 10px;
+}
+
+.blog-content {
+    max-height: 500px;
+    overflow: hidden;
+    /*box-shadow: 0 -9px 15px -12px rgba(0, 0, 0, 0.7) inset;*/
+    /*background: -webkit-gradient(linear, 0% 80%, 0% 100%, from(black), to(white));*/
+    /*color: transparent;*/
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+
+.btn-read-all {
+    margin-top: 15px;
+}
+
