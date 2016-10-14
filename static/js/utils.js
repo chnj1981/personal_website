@@ -68,12 +68,9 @@ var htmlToMarkdown = function (html) {
     var converter = new showdown.Converter();
     converter.setOption("tasklists", true);
     converter.setOption("tables", true);
-
-    $(html).each(function () {
-        var self = $(this)
-        var str = self.text()
-        self.html(converter.makeHtml(str))
-    });
+    var self = $(html)
+    log(self.text())
+    self.html(converter.makeHtml(self.text()))
 }
 
 var longTimeAgo = function () {
