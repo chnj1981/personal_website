@@ -69,7 +69,6 @@ var htmlToMarkdown = function (html) {
     converter.setOption("tasklists", true);
     converter.setOption("tables", true);
     var self = $(html)
-    log(self.text())
     self.html(converter.makeHtml(self.text()))
 }
 

@@ -16,7 +16,7 @@ class TopicComment(db.Model, ModelMixin):
         self.updated_time = timestamp()
 
     def valid(self):
-        return 800 > len(self.content) > 3
+        return 1000 > len(self.content) > 3
 
     def add(self, user, topic):
         if self.valid():
