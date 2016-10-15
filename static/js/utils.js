@@ -47,7 +47,7 @@ var goTop = function () {
     });
 }
 
-var checkSubmit = function (input, btn, min_l = 1) {
+var checkSubmit = function (input, btn, min_l) {
     var all = $(input)
     all.each(function () {
         $(this).keyup(function () {

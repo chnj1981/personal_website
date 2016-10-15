@@ -110,6 +110,7 @@ class BlogComment(db.Model, ModelMixin):
     def response(self):
         return {
             'id': self.id,
+            'user_id': self.user.id,
             'comment': self.comment,
             'created_time': self.created_time,
             'avatar': self.user.avatar,

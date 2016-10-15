@@ -7,10 +7,10 @@ var weiboTemplate = function (w) {
 <div class="wb-item col-xs-12 border-std shadow" data-id="${ w.id }">
     <div class="wb-main row">
         <div class="col-xs-1">
-            <a><img class="img-m img-rounded" src="${ w.avatar }"></a>
+            <img class="img-m img-rounded" src="${ w.avatar }">
         </div>
         <div class="col-xs-10 wb-info">
-            <div class=""><a href="#">${ w.nickname }</a></div>
+            <div class=""><a href="${ "/user/profile/" +  w.user_id }" >${ w.nickname }</a></div>
             <span>发布于: </span><span class="timestamp" >${ timestampProcess(w.created_time) }</span>
             <p class="wb-content">${ w.weibo }</p>
         </div>
@@ -81,7 +81,6 @@ var bindEventUpdateToggle = function () {
         if (p.hasClass("active")) {
             p.removeClass("active");
             ul.removeClass('fuck-nav')
-
         } else {
             p.addClass("active")
             ul.addClass('fuck-nav')
@@ -93,8 +92,6 @@ var bindEventUpdateToggle = function () {
 var bindEventWeiboUpdate = function () {
     $('.wb-cells').on('click', '.btn-wb-update-submit', function () {
         if ($(this).hasClass('disabled')) return false
-
-
         var w = $(this).closest('.wb-item');
         var update = w.find('.input-wb-update');
         var old = w.find('.wb-content');
@@ -182,11 +179,11 @@ var commentTemplate = function (c) {
     return `
 <div class="row wb-comment-item">
     <div class="col-xs-1">
-        <a href="#"><img class="img-s img-rounded" src="${ c.avatar }"></a>
+        <img class="img-s img-rounded" src="${ c.avatar }">
     </div>
     <div class="col-xs-10">
         <p>
-            <a href="#">${ c.nickname }</a><span> : </span>${ c.comment }
+            <a href="${ "/user/profile/" +  c.user_id }">${ c.nickname }</a><span> : </span>${ c.comment }
         </p>
         <span class="timestamp">${ timestampProcess(c.created_time) }</span>
     </div>
@@ -259,7 +256,7 @@ var bindEventCallDJ = function () {
 var checkInput = function () {
     checkSubmit('.input-wb-new', '.btn-wb-add', 3)
     checkSubmit('.input-wb-update', '.btn-wb-update-submit', 3)
-    checkSubmit('.input-wb-comment', '.btn-wb-comment-add')
+    checkSubmit('.input-wb-comment', '.btn-wb-comment-add', 1)
 }
 
 var weiboLike = function () {

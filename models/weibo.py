@@ -91,8 +91,8 @@ class Weibo(db.Model, ModelMixin):
             nickname=self.user.nickname,
             created_time=self.created_time,
             avatar=self.user.avatar,
-            comments_num=self.comments_num
-        )
+            comments_num=self.comments_num,
+            user_id = self.user.id)
 
 
 class Comment(db.Model, ModelMixin):
@@ -133,4 +133,5 @@ class Comment(db.Model, ModelMixin):
         return dict(comment=self.comment,
                     nickname=self.user.nickname,
                     created_time=self.created_time,
-                    avatar=self.user.avatar)
+                    avatar=self.user.avatar,
+                    user_id = self.user.id)

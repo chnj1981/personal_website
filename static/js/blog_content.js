@@ -3,7 +3,7 @@ var commentTemplate = function (c) {
 <div class="comment-item row">
     <div class="col-xs-1 u-avatar"><img src=${ c.avatar } class="img-l img-rounded"></div>
     <div class="col-xs-8 u-comment">
-        <p>${ c.nickname }</p>
+        <a href="${ '/user/profile/' + c.user_id }">${ c.nickname }</a>
         <p>${ c.comment }</p>
         <p class="timestamp">${ timestampProcess(c.created_time) }</p>
     </div>
