@@ -87,6 +87,11 @@ var bindEventRegister = function () {
 
 var bindEventConvert = function () {
     $('.btn-change').click(function () {
+        var login = $('.btn-login')
+        var signin = $('.btn-register')
+        login.addClass('disabled')
+        signin.addClass('disabled')
+
         var parent = $(this).parents('.col-center-block')
         parent.addClass('hide')
         var sibling = parent.siblings('.col-center-block')
@@ -95,8 +100,9 @@ var bindEventConvert = function () {
     })
 }
 
+
 var bindEventLogin = function () {
-    $('.btn-login').click(function () {
+    $('.btn-login').on('click', function () {
         if ($(this).hasClass('disabled')) {
             return false
         }
@@ -126,6 +132,10 @@ var bindEventLogin = function () {
 
 var bindEventJoke = function () {
     $('.btn-admin').click(function () {
+        if ($(this).hasClass('disabled')) {
+            return false
+        }
+
         var parent = $(this).parents('.register')
 
         $('span.register-error').addClass('hide')
@@ -201,6 +211,11 @@ var bindEvents = function () {
     bindEventJoke()
     invalidLogin()
     invalidRegister()
+    $(document).keypress(function (e) {
+        if (e.which == 13) {
+            $('.btn-login, .btn-register').click()
+        }
+    });
 }
 
 $(document).ready(function () {
