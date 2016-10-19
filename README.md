@@ -29,3 +29,6 @@
 - [alertify.js](https://github.com/fabien-d/alertify.js)
 - [js-xss](https://github.com/leizongmin/js-xss)
 
+###部 署
+- [Apache](https://httpd.apache.org/)
+- [Gunicorn](http://gunicorn.org/)
