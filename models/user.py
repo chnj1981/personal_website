@@ -52,7 +52,7 @@ class User(db.Model, ModelMixin):
         valid_nickname_len = 10 >= len(self.nickname) >= 1
         valid_username_len = 15 >= len(self.username) >= 6
         valid_password_len = 15 >= len(self.password) >= 6
-        valid_captcha = self.captcha == ''
+        valid_captcha = self.captcha == 'python'
         err_msgs = ''
 
         u_match = r'^[\w]{6,15}$'

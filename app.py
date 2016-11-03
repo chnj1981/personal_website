@@ -16,9 +16,10 @@ from routes.forum import main as routes_forum
 from routes.user import main as routes_user
 from routes.weibo import main as routes_weibo
 from routes.blog import main as routes_blog
+from routes.weixin import main as routes_weixin
 from routes.weibo_api import main as routes_weibo_api
 
-import conf
+# import conf
 
 # from routes.chat import main as routes_chat
 
@@ -33,15 +34,17 @@ def register_routes(app):
     app.register_blueprint(routes_forum, url_prefix='/forum')
     app.register_blueprint(routes_weibo, url_prefix='/weibo')
     app.register_blueprint(routes_blog, url_prefix='/blog')
+    app.register_blueprint(routes_weixin, url_prefix='/weixin')
     app.register_blueprint(routes_weibo_api, url_prefix='/api/weibo')
     # app.register_blueprint(routes_chat, url_prefix='/chat')
 
 
 def configure_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-    app.secret_key = conf.SESSION_KEY
-    # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}'.format(db_path)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:{}@localhost/personal'.format(conf.DB_PWD)
+    # app.secret_key = conf.SESSION_KEY
+    app.secret_key = 'conf.SESSION_KEY'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}'.format(db_path)
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:{}@localhost/personal'.format(conf.DB_PWD)
     db.init_app(app)
     register_routes(app)
 
@@ -59,13 +62,13 @@ def error404(e):
 @manager.command
 def server():
     app = configured_app()
-    # config = dict(
-    #     debug=True,
-    #     host='0.0.0.0',
-    #     port=3000,
-    # )
-    # app.run(**config)
-    app.run()
+    config = dict(
+        debug=True,
+        host='0.0.0.0',
+        port=80,
+    )
+    app.run(**config)
+    # app.run()
 
 
 def configure_manager():
