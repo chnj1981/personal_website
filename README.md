@@ -2,8 +2,7 @@
 
 测试账号/密码(123456/123456)
 
-<img src="http://oexqautw4.bkt.clouddn.com/frontdoor.png">
-
+![正门](http://oexqautw4.bkt.clouddn.com/frontdoor.png)
 ###编程语言
 
 - [Python 3](https://www.python.org/)
@@ -29,3 +28,6 @@
 - [alertify.js](https://github.com/fabien-d/alertify.js)
 - [js-xss](https://github.com/leizongmin/js-xss)
 
+###部 署
+- [Apache](https://httpd.apache.org/)
+- [Gunicorn](http://gunicorn.org/)
