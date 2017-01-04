@@ -2,7 +2,7 @@
 
 测试账号/密码(123456/123456)
 
-![正门](http://oexqautw4.bkt.clouddn.com/frontdoor.png)
+![正门](https://oexqautw4.bkt.clouddn.com/frontdoor.png)
 ###编程语言
 
 - [Python 3](https://www.python.org/)
