@@ -134,8 +134,8 @@ def send_msg():
                         'title': u'dfdfdfd',
                         'description': u'第一条新闻描述，这条新闻没有预览图',
                         'picurl':
-                            u'http://ww4.sinaimg.cn/bmiddle/6af89bc8gw1f8qum85uzqj203d03fglj.jpg',
-                        'url': u'http://www.baidu.com',
+                            u'https://ww4.sinaimg.cn/bmiddle/6af89bc8gw1f8qum85uzqj203d03fglj.jpg',
+                        'url': u'https://www.baidu.com',
                     }
                 ])
             response = wechat.response_text(content=reply_text)
@@ -160,7 +160,7 @@ def fake_api():
             {
                 'type': 'view',
                 'name': '支持商户',
-                'url': 'http://biaojiepay.com'
+                'url': 'https://biaojiepay.com'
             },
             {
                 'name': '@我',
@@ -168,12 +168,12 @@ def fake_api():
                     {
                         'type': 'view',
                         'name': '1、认识我们',
-                        'url': 'http://biaojiepay.com',
+                        'url': 'https://biaojiepay.com',
                     },
                     {
                         'type': 'view',
                         'name': '2、账户余额',
-                        'url': 'http://biaojiepay.com',
+                        'url': 'https://biaojiepay.com',
                     },
                     {
                         'type': 'click',
@@ -183,12 +183,12 @@ def fake_api():
                     {
                         'type': 'view',
                         'name': '4、账户充值',
-                        'url': 'http://biaojiepay.com',
+                        'url': 'https://biaojiepay.com',
                     },
                     {
                         'type': 'view',
                         'name': '5、免费硬件',
-                        'url': 'http://biaojiepay.com',
+                        'url': 'https://biaojiepay.com',
                     },
                 ]
             }

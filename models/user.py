@@ -15,7 +15,7 @@ class User(db.Model, ModelMixin):
     github = db.Column(db.String(50), default='')
     qq = db.Column(db.String(20), default='')
     avatar = db.Column(db.String(300),
-                       default='http://img.doutula.com/production/uploads/image/2016/04'
+                       default='https://img.doutula.com/production/uploads/image/2016/04'
                                '/28/20160428814398_VIibxX.gif')
     weibos = db.relationship('Weibo', backref='user', lazy='dynamic',
                              order_by="desc(Weibo.id)")
