@@ -1,7 +1,4 @@
 # Byte-compiled / optimized / DLL files
-*.default.css
-*.min.js
-*.min.css
 *.sqlite
 migrations/
 static/img/
