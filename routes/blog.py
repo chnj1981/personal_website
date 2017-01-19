@@ -10,6 +10,7 @@ _MODEL2 = BlogComment
 
 @main.route('/')
 def index():
+    user = current_user()
     models = _MODEL.all()
     return render_template('blog_index.html', blogs=models, user=user)
 
