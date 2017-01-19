@@ -1,6 +1,7 @@
 from routes import *
 
 from models.user import User
+from routes.qiniu_snippet import upload
 
 main = Blueprint('user', __name__)
 
@@ -62,8 +63,25 @@ def profile_update(user):
 @main.route('/user/profile/<int:id>')
 @login_required
 def profile(user, id):
+    QINIU_CONF = {
+        'access_key': 'y3yQW3u8z8GmfiC9VBBDsyDYHK4BmpyNLI_MneIh',
+        'secret_key': 'B6lwo4EAwct6NeDjiWhjH0-tzvkwPPKPQ4CW1xds',
+        'upload_bucket': 'space',
+        'avatar_upload_folder': 'upload/avatar/',
+        'test_upload_folder': 'upload/test/',
+    }
+
     view_user = User.query.get_or_404(id)
-    return render_template('profile.html', user=user, view_user=view_user)
+    from routes.qiniu_snippet import Auth
+    a = Auth(QINIU_CONF['access_key'], QINIU_CONF['secret_key'])
+    token = a.upload_token('space', QINIU_CONF['avatar_upload_folder'] + user.username + '.gif')
+    # upload(user.username + 'avatar')
+    # print(token, user.username + 'avatar.png')
+    data = {
+        'token': token,
+        'filename': QINIU_CONF['avatar_upload_folder'] + user.username + '.gif',
+    }
+    return render_template('profile.html', user=user, view_user=view_user, data=data)
 
 
 @main.route('/taoing')

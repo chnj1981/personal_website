@@ -1,8 +1,8 @@
-# 个人网站 [simplue.cc](http://simplue.cc) 
+# 个人网站 [simplue.cc](https://simplue.cc)
 
 测试账号/密码(123456/123456)
 
-![正门](https://oexqautw4.bkt.clouddn.com/frontdoor.png)
+![正门](https://oj8yna8y7.qnssl.com/frontdoor.png)
 ###编程语言
 
 - [Python 3](https://www.python.org/)
@@ -30,4 +30,4 @@
 
 ###部 署
 - [Apache](https://httpd.apache.org/)
-- [Gunicorn](http://gunicorn.org/)
+- [Gunicorn](https://gunicorn.org/)
