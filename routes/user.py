@@ -7,8 +7,8 @@ main = Blueprint('user', __name__)
 
 @main.route('/')
 def index():
-    if current_user() is None:
-        return render_template('user_login.html', user=None)
+    # if current_user() is None:
+    #     return render_template('user_login.html', user=None)
     return redirect(url_for('blog.index'))
 
 
