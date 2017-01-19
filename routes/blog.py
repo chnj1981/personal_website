@@ -9,15 +9,13 @@ _MODEL2 = BlogComment
 
 
 @main.route('/')
-@login_required
 def index(user):
     models = _MODEL.all()
     return render_template('blog_index.html', blogs=models, user=user)
 
 
 @main.route('/content/<int:id>')
-@login_required
-def content(user, id):
+def content(id):
     m = _MODEL.query.get_or_404(id)
     next = _MODEL.query.filter(_MODEL.id > id).first()
     prev = _MODEL.query.filter(_MODEL.id < id).order_by(_MODEL.id.desc()).first()
