@@ -57,10 +57,17 @@
             <li class="nav-item left"><a href="{{ url_for('blog.index') }}">个人博客</a></li>
             <li class="nav-item left"><a href="https://github.com/simplue/personal">关于网站</a></li>
             <li class="nav-item right user-dropdown">
+                {% if user is not none %}
                 <a href="{{ url_for('user.profile', id=user.id) }}">
                     <img src="{{ user.avatar }}" class="img-s img-rounded">
                     <span>&nbsp;{{ user.nickname }}</span>
                 </a>
+                {% else %}
+                <a href="#">
+                    <img src="#" class="img-s img-rounded">
+                    <span>匿名用户</span>
+                </a>
+                {% endif %}
                 <div id='jiji' class="dropdown-content shadow">
                     <a class="gua-nav-item" href="{{ url_for('user.profile', id=user.id) }}">个人资料</a>
                     <a class="gua-nav-item" href="{{ url_for('user.logout') }}">登出</a>
