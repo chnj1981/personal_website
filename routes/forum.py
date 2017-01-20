@@ -10,14 +10,13 @@ _Model2 = TopicComment
 
 
 @main.route('/')
-@login_required
-def index(user):
+def index():
     return redirect(url_for('.board', nodename='all'))
 
 
 @main.route('/<nodename>/')
-@login_required
-def board(user, nodename):
+def board(nodename):
+    user = current_user()
     items_per_page = 15
     if nodename == 'all':
         page = request.args.get('page', 1, type=int)
@@ -37,8 +36,8 @@ def board(user, nodename):
 
 
 @main.route('/topic/<int:id>/')
-@login_required
-def show(user, id):
+def show(id):
+    user = current_user()
     m = _Model.query.get_or_404(id)
     m.views += 1
     m.save()

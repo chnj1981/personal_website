@@ -6,8 +6,8 @@ main = Blueprint('weibo', __name__)
 
 
 @main.route('/')
-@login_required
-def index(user):
+def index():
+    user = current_user()
     items_per_page = 20
     weibo_top = Weibo.query.filter(Weibo.id == 1).first()
     page = request.args.get('page', 1, type=int)

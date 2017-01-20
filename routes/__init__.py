@@ -51,7 +51,7 @@ def login_required(f):
     def function(*args, **kwargs):
         u = current_user()
         if u is None:
-            return redirect(url_for('user.index'))
+            return redirect(url_for('user.door'))
         if u.id in black_list:
             abort(404)
         return f(u, *args, **kwargs)

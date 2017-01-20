@@ -73,32 +73,33 @@ var bindEventRegister = function () {
 
         var response = function (r) {
             if (r.success) {
-                successView(parent)
-                location.href = "/weibo"
+                successView(parent);
+                // location.href = "/weibo"
+                window.history.go(-1)
             } else {
-                $('.register-error').removeClass('hide')
-                $('.register-error').html(r.message)
+                $('.register-error').removeClass('hide');
+                $('.register-error').html(r.message);
                 error_view(parent)
             }
-        }
+        };
         api.userRegister(data, response)
     })
-}
+};
 
 var bindEventConvert = function () {
     $('.btn-change').click(function () {
-        var login = $('.btn-login')
-        var signin = $('.btn-register')
-        login.addClass('disabled')
-        signin.addClass('disabled')
+        var login = $('.btn-login');
+        var signin = $('.btn-register');
+        login.addClass('disabled');
+        signin.addClass('disabled');
 
-        var parent = $(this).parents('.col-center-block')
-        parent.addClass('hide')
-        var sibling = parent.siblings('.col-center-block')
-        sibling.removeClass('hide')
+        var parent = $(this).parents('.col-center-block');
+        parent.addClass('hide');
+        var sibling = parent.siblings('.col-center-block');
+        sibling.removeClass('hide');
         sibling.addClass('flipInY')
     })
-}
+};
 
 
 var bindEventLogin = function () {
@@ -106,21 +107,21 @@ var bindEventLogin = function () {
         if ($(this).hasClass('disabled')) {
             return false
         }
-        var parent = $(this).parents('.login')
+        var parent = $(this).parents('.login');
 
-        $('.login-error').addClass('hide')
+        $('.login-error').addClass('hide');
 
         var data = {
             username: parent.find(':input.username').val(),
             password: parent.find(':input.password').val()
-        }
+        };
 
         var response = function (r) {
             if (r.success) {
-                successView(parent.parents('.container'))
-                location.href = "/weibo"
+                successView(parent.parents('.container'));
+                window.history.go(-1)
             } else {
-                $('.login-error').removeClass('hide')
+                $('.login-error').removeClass('hide');
                 error_view(parent)
             }
         }

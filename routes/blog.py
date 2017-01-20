@@ -17,6 +17,7 @@ def index():
 
 @main.route('/content/<int:id>')
 def content(id):
+    user = current_user()
     m = _MODEL.query.get_or_404(id)
     next = _MODEL.query.filter(_MODEL.id > id).first()
     prev = _MODEL.query.filter(_MODEL.id < id).order_by(_MODEL.id.desc()).first()

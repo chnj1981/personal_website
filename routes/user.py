@@ -12,6 +12,11 @@ def index():
     return redirect(url_for('blog.index'))
 
 
+@main.route('/door')
+def door():
+    return render_template('user_login.html', user=None)
+
+
 @main.route('/register', methods=['POST'])
 def register():
     form = request.form
