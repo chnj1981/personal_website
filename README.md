@@ -2,11 +2,7 @@
 
 测试账号/密码(123456/123456)
 
-![正门](https://oj8yna8y7.qnssl.com/frontdoor.png)
-###编程语言
-
-- [Python 3](https://www.python.org/)
-- [JavaScript] (https://www.javascript.com/)
+![正门](https://oj8yna8y7.qnssl.com/door.png?imageView2/2/w/800/format/gif/interlace/1/q/100)
 
 ###后 端
 
@@ -25,9 +21,9 @@
 - [Bootstrap](https://github.com/twbs/bootstrap)
 - [Showdown](https://github.com/showdownjs/showdown)
 - [Highlight.js](https://github.com/isagalaev/highlight.js)
-- [alertify.js](https://github.com/fabien-d/alertify.js)
+- [AlertifyJS](https://github.com/MohammadYounes/AlertifyJS)
 - [js-xss](https://github.com/leizongmin/js-xss)
 
 ###部 署
-- [Apache](https://httpd.apache.org/)
-- [Gunicorn](http://gunicorn.org/)
+- [Nginx](https://nginx.org)
+- [Gunicorn](http://gunicorn.org)
