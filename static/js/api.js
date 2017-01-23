@@ -6,8 +6,23 @@ api.ajax = function (url, method, form, callback) {
         type: method,
         data: form,
         success: function (response) {
-            var r = JSON.parse(response)
-            callback(r)
+            try {
+                var r = JSON.parse(response)
+                callback(r)
+            }
+            catch(err) {
+                alertify.confirm(
+                    '不耐烦的提示框',
+                    '呃... 要不您先登个「陆」?',
+                    function(){
+                        location.href = '/door'
+                    },
+                    function(){
+                        alertify.error('小的先退下, 有事儿您吩咐~')
+                    }).set(
+                    'labels', {ok:'带路', cancel:'退下'}
+                    );
+            }
         },
         error: function (response) {
             var r = {

@@ -10,19 +10,17 @@
     <link rel="stylesheet" href="https://oj8yna8y7.qnssl.com/static/css/pure-min.css">
     <link rel="stylesheet" href="https://oj8yna8y7.qnssl.com/static/css/bootstrap.min.css">
     <script src="https://oj8yna8y7.qnssl.com/static/js/showdown.min.js"></script>
-    <link href="https://rawgit.com/isagalaev/highlight.js/master/src/styles/monokai-sublime.css"
-          rel="stylesheet">
+    <link href="https://oj8yna8y7.qnssl.com/static/css/monokai-sublime.css" rel="stylesheet">
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
-
-
+    <script src="https://oj8yna8y7.qnssl.com/static/js/highlight.min.js"></script>
     <script src="https://oj8yna8y7.qnssl.com/static/js/xss.min.js"></script>
-    <link rel="stylesheet" href="https://oj8yna8y7.qnssl.com/static/css/alertify.core.css">
-    <link rel="stylesheet" href="https://oj8yna8y7.qnssl.com/static/css/alertify.default.css">
-    <script src="https://oj8yna8y7.qnssl.com/static/js/alertify.min.js"></script>
     <script src="/static/js/utils.js"></script>
     <script src="/static/js/api.js"></script>
     <link rel="stylesheet" href="/static/css/base.css">
+
+    <link rel="stylesheet" href="https://oj8yna8y7.qnssl.com/static/css/alertify.min.css">
+    <link rel="stylesheet" href="https://oj8yna8y7.qnssl.com/static/css/themes/default.min.css">
+    <script src="https://oj8yna8y7.qnssl.com/static/js/alertify.min.js"></script>
 
     {% block import %}
     {% endblock %}
@@ -45,15 +43,8 @@
             </a>
         </div>
         <ul class="nav-list">
-            <li class="nav-item left"><a href="{{ url_for('weibo.index') }}">微博</a></li>
+            <li class="nav-item left"><a href="{{ url_for('weibo.index') }}">留言板</a></li>
             <li class="nav-item left"><a href="{{ url_for('forum.index') }}">论坛</a></li>
-
-            {# <li class="nav-item left"><a href="{{ url_for('chat.index') }}">聊天室(施工中)</a></li> #}
-            {# <li class="nav-item left"><a href="{{ url_for('user.taoing') }}" >聊天室(施工中)</a></li> #}
-            {# <li class="nav-item left"><a href="#">聊天室(施工中)</a></li> #}
-
-{#            <li class="nav-item left"><a#}
-{#                href="{{ url_for('forum.board', nodename='fuckbug') }}">臭虫标本室</a></li>#}
             <li class="nav-item left"><a href="{{ url_for('blog.index') }}">博客</a></li>
             <li class="nav-item left"><a href="https://github.com/simplue/personal">关于</a></li>
             <li class="nav-item right user-dropdown">
@@ -68,7 +59,6 @@
                 </div>
                 {% else %}
                 <a href="/door">
-{#                    <img src="http://ww1.sinaimg.cn/large/6af89bc8gw1f8sfxju72qj20a00a0jrm.jpg" class="img-s img-rounded">#}
                     <span>登录 / 注册</span>
                 </a>
                 {% endif %}
