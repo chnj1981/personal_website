@@ -14,7 +14,9 @@ def index():
 
 @main.route('/door')
 def door():
-    return render_template('user_login.html', user=None)
+    if current_user() is None:
+        return render_template('user_login.html', user=None)
+    return redirect(url_for('weibo.index'))
 
 
 @main.route('/register', methods=['POST'])

@@ -74,8 +74,7 @@ var bindEventRegister = function () {
         var response = function (r) {
             if (r.success) {
                 successView(parent);
-                // location.href = "/weibo"
-                window.history.go(-1)
+                location.href = "/weibo"
             } else {
                 $('.register-error').removeClass('hide');
                 $('.register-error').html(r.message);
@@ -119,7 +118,7 @@ var bindEventLogin = function () {
         var response = function (r) {
             if (r.success) {
                 successView(parent.parents('.container'));
-                window.history.go(-1)
+                window.location.href = '/weibo'
             } else {
                 $('.login-error').removeClass('hide');
                 error_view(parent)
