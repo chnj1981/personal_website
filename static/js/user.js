@@ -130,6 +130,33 @@ var bindEventLogin = function () {
     })
 }
 
+
+var bindFastLogin = function () {
+    $('.btn-login-fast').on('click', function () {
+        var parent = $(this).parents('.login');
+        $('.login-error').addClass('hide');
+
+        var data = {
+            username: '123456',
+            password: '123456'
+        };
+
+        var response = function (r) {
+            if (r.success) {
+                successView(parent.parents('.container'));
+                window.location.href = '/weibo'
+            } else {
+                $('.login-error').removeClass('hide');
+                error_view(parent)
+            }
+        }
+
+        api.userLogin(data, response)
+
+    })
+}
+
+
 var bindEventJoke = function () {
     $('.btn-admin').click(function () {
         if ($(this).hasClass('disabled')) {
@@ -205,10 +232,11 @@ var invalidLogin = function () {
 }
 
 var bindEvents = function () {
+    bindFastLogin()
     bindEventLogin()
     bindEventConvert()
     bindEventRegister()
-    bindEventJoke()
+    // bindEventJoke()
     invalidLogin()
     invalidRegister()
     $(document).keypress(function (e) {
