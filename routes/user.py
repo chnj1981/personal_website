@@ -9,7 +9,7 @@ main = Blueprint('user', __name__)
 def index():
     # if current_user() is None:
     #     return render_template('user_login.html', user=None)
-    return redirect(url_for('blog.index'))
+    return redirect(url_for('weibo.index'))
 
 
 @main.route('/door')
@@ -46,7 +46,7 @@ def login():
 @login_required
 def logout(user):
     session.pop('user_id', None)
-    return redirect(url_for('.index'))
+    return redirect(url_for('weibo.index'))
 
 
 @main.route('/user/update_password', methods=['POST'])
