@@ -38,9 +38,9 @@
             </a>
         </div>
         <ul class="nav-list">
-            <li class="nav-item left"><a href="{{ url_for('weibo.index') }}">留言板</a></li>
+            <li class="nav-item left"><a href="{{ url_for('weibo.index') }}">微博</a></li>
             <li class="nav-item left"><a href="{{ url_for('forum.index') }}">论坛</a></li>
-            <li class="nav-item left"><a href="{{ url_for('blog.index') }}">博客</a></li>
+{#            <li class="nav-item left"><a href="{{ url_for('blog.index') }}">博客</a></li>#}
             <li class="nav-item left"><a href="https://github.com/simplue/personal">关于</a></li>
             <li class="nav-item right user-dropdown">
                 {% if user != None %}
